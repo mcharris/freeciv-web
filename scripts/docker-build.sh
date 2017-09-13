@@ -79,18 +79,7 @@ service nginx stop
 rm /etc/nginx/sites-enabled/default
 cp ${basedir}/publite2/nginx.conf /etc/nginx/
 
-# add Freeciv-web scripts to path
-export PATH=$PATH:/docker/scripts
+mkdir -p ${basedir}/logs
+chmod 777 ${basedir}/logs
 
-if [ -d "/docker/" ]; then
-  echo "Starting Freeciv-web..."
-  service nginx start
-  mkdir -p ${basedir}/logs
-  chmod 777 ${basedir}/logs
-  cd ${basedir}/scripts/ && sudo -u freeciv ./start-freeciv-web.sh
-else
-  echo "Freeciv-web installed. Please start it manually."
-fi
-
-echo "Freeciv-web started! Now try to access Freeciv-web with the docker machine IP in your browser.."
-/bin/bash
+echo "Freeciv-web installed."
